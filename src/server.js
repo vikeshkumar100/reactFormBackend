@@ -30,7 +30,7 @@ app.get('/users',(req,res)=>{
         return res.status(200).json(result);
     })
 })
-app.post('/login',(req,res)=>{
+app.post('/signup',(req,res)=>{
     const {name,password}=req.body;
     const q1="insert into users(name,password) values(?,?)";
     db.query(q1,[name,password],(err,result)=>{
