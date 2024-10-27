@@ -32,8 +32,8 @@ app.get('/users',(req,res)=>{
 })
 app.post('/signup',(req,res)=>{
     const {name,password}=req.body;
-    const q1="insert into users(name,password) values(?,?)";
-    db.query(q1,[name,password],(err,result)=>{
+    const q1="insert into users(email,password) values(?,?)";
+    db.query(q1,[email,password],(err,result)=>{
         if(err){
             return res.status(500).json({ error: 'Failed to insert user', details: err });
         }
