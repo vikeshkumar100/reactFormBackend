@@ -9,12 +9,16 @@ app.use(express.json());
 dotenv.config();
 
 const port=process.env.port || 3000;
-const db=mysql.createConnection({
-    host:process.env.host,
-    user:process.env.user,
-    password:process.env.password,
-    database:process.env.database
-})
+const db = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,   // Wait if all connections are in use
+    connectionLimit: 10,        // Allow up to 10 concurrent connections
+    queueLimit: 20              // Queue up to 20 connection requests when all connections are busy
+});
+
 
 app.get('/',(req,res)=>{
     res.send('Hello World');
